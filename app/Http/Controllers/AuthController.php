@@ -4,28 +4,24 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Entities\User;
-use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController
 {
-    public function __construct(
-        private readonly EntityManagerInterface $em,
-    ) {
-    }
-
     public function login(): RedirectResponse
     {
-        Auth::login($this->em->find(User::class, 1));
+        Auth::attempt(['email' => 'user@example.com', 'password' => 'password']);
 
         return new RedirectResponse(route('todo.index'));
     }
 
-    public function logout(): RedirectResponse
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return new RedirectResponse(route('todo.index'));
     }
