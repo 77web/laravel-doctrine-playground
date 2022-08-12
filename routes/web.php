@@ -17,3 +17,6 @@ use App\Http\Controllers;
 Route::get('/', [Controllers\TodoController::class, 'index'])->name('todo.index');
 Route::get('/new', [Controllers\TodoController::class, 'new'])->name('todo.new');
 Route::post('/create', [Controllers\TodoController::class, 'create'])->name('todo.create');
+
+Route::get('/dummy-login', [Controllers\AuthController::class, 'login'])->name('login');
+Route::get('/dummy-logout', [Controllers\AuthController::class, 'logout'])->name('logout');
