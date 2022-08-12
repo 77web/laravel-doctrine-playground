@@ -21,7 +21,7 @@ class User implements Authenticatable
     #[ORM\Column(type: 'string', length: 255)]
     public ?string $password = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     public ?string $rememberToken = null;
 
     public function getAuthIdentifierName()
